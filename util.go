@@ -8,8 +8,8 @@ import (
 
 //lookupEnvOrBool returns true if Env var is set
 func lookupEnvOrBool(key string, defaultVal bool) bool {
-	if _, ok := os.LookupEnv(key); ok {
-		return true
+	if val, ok := os.LookupEnv(key); ok {
+		return val == "true"
 	}
 	return defaultVal
 }

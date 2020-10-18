@@ -1,5 +1,5 @@
 run:
-	DEBUG=1 TLS=True PORT=9000 go run .
+	DEBUG=1 TLS=True go run .
 
 cert: ## Create certificates to encrypt the gRPC connection
 	openssl genrsa -out ca.key 4096
