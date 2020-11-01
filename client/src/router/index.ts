@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
+import Profile from '../views/Profile.vue'
+import { authGuard } from '../auth'
 
 Vue.use(VueRouter)
 
@@ -9,6 +11,12 @@ const routes: Array<RouteConfig> = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
+    beforeEnter: authGuard
   },
   {
     path: '/about',

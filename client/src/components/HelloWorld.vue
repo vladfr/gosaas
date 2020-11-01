@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <p>{{ $auth.user.accessToken }}</p>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -37,13 +38,19 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import * as grpcWeb from 'grpc-web';
 import { GreeterClient } from '@/proto/helloworld/HelloworldServiceClientPb';
 import {HelloRequest, HelloReply} from '@/proto/helloworld/helloworld_pb';
+import { AuthUnaryInterceptor } from '@/auth'
 
 @Component
 export default class HelloWorld extends Vue {
   @Prop() private msg!: string;
 
   mounted() {
-    const service = new GreeterClient('http://localhost:8000', null, null);
+    const authInterceptor = new AuthUnaryInterceptor(this.$auth.user?.accessToken)
+    const options = {
+      unaryInterceptors: [authInterceptor],
+      streamInterceptors: [authInterceptor]
+    }
+    const service = new GreeterClient('http://localhost:8000', null, options);
     const request = new HelloRequest();
     request.setName('VueJS');
     const call = service.sayHello(

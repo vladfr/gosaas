@@ -1,22 +1,27 @@
-# client
+# VueJS gRPC client starter
 
-## Project setup
+This project is a starter point for a SPA with VueJS and gRPC.
+
+## Components
+
+ - VueJS 2.x with Typescript
+ - grpc-web
+
+## Getting started
+
 ```
 yarn install
-```
 
-### Compiles and hot-reloads for development
-```
+# Generate all proto files for js/ts
+yarn proto
+
+# Compiles and hot-reloads for development
 yarn serve
-```
 
-### Compiles and minifies for production
-```
+# Compiles and minifies for production
 yarn build
-```
 
-### Lints and fixes files
-```
+# Lints and fixes files
 yarn lint
 ```
 
